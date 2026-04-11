@@ -68,8 +68,6 @@ Si tenés Windows 10 u 11, ya tenés **Microsoft Edge** instalado, así que no n
 
 > La app es **portable**: podés guardar la carpeta en cualquier lugar o en un pendrive. No modifica tu sistema ni deja entradas en el registro de Windows.
 
----
-
 ## 🖥️ Cómo usar la aplicación paso a paso
 
 Una vez abierta la app, verás esta pantalla principal:
@@ -173,7 +171,7 @@ El archivo `.exe` es solo para Windows. Para Mac y Linux, necesitás compilar la
 ### Instalación
 
 ```bash
-git clone https://github.com/JoaquinCalligaro/Lighthouse-app.git
+git clone https://github.com/joaquincalligaro/lighthouse-app.git
 cd lighthouse-app
 npm install
 ```
@@ -271,6 +269,24 @@ Los estilos están construidos con [**Tailwind CSS**](https://tailwindcss.com).
 ### Iconos de navegadores
 
 Los iconos SVG de Chrome, Brave, Edge y Opera fueron obtenidos de [**icons8.com**](https://icons8.com) bajo su licencia de uso gratuito con atribución.
+
+---
+
+## 📦 Historial de versiones
+
+### v2.0.0 — 11 de abril de 2026
+- Versión inicial publicada
+- App de escritorio Electron para auditorías Lighthouse locales
+- Detección automática de Chrome, Brave, Edge y Opera
+- Selector manual de navegador via explorador de archivos del SO
+- Barra de progreso en tiempo real con etiquetas de etapa
+- Log de actividad estilo terminal
+- Tarjetas de puntuación animadas (Rendimiento, Accesibilidad, Buenas Prácticas, SEO)
+- Exportación de informe PDF con Core Web Vitals
+- Modo oscuro / claro con persistencia en localStorage
+- Fix de seguridad: eliminada ruta personal hardcodeada del directorio de salida del build
+- README completo con guía paso a paso para usuarios no técnicos
+- Release portable para Windows: `Lighthouse-Audit-Tool-v2.0.0-win-portable.zip`
 
 ---
 
