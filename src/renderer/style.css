@@ -1,0 +1,177 @@
+/* ═══════════════════════════════════════════════════════
+   tailwind-animations  (github.com/midudev/tailwind-animations)
+   Keyframes + utility classes – CDN-compatible, no build step needed
+   ═══════════════════════════════════════════════════════ */
+
+/* animate-fade-in */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.animate-fade-in {
+  animation: fade-in 0.45s ease both;
+}
+
+/* animate-blurred-fade-in */
+@keyframes blurred-fade-in {
+  from {
+    opacity: 0;
+    filter: blur(12px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+.animate-blurred-fade-in {
+  animation: blurred-fade-in 0.55s ease both;
+}
+
+/* animate-slide-in-top */
+@keyframes slide-in-top {
+  from {
+    opacity: 0;
+    transform: translateY(-18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-slide-in-top {
+  animation: slide-in-top 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* animate-bouncing – subtle vertical bounce */
+@keyframes bouncing {
+  0%,
+  100% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(-20%);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+.animate-bouncing {
+  animation: bouncing 0.9s infinite;
+}
+
+/* animate-pulsing – opacity pulse (used on loading label) */
+@keyframes pulsing {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+.animate-pulsing {
+  animation: pulsing 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Progress bar gradient + shimmer
+   ═══════════════════════════════════════════════════════ */
+.bar-gradient {
+  background: linear-gradient(90deg, #3b82f6 0%, #6366f1 50%, #10b981 100%);
+  background-size: 200% 100%;
+  animation: barShimmer 2s linear infinite;
+}
+
+@keyframes barShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   Score card entrance (staggered blurred-fade-in)
+   ═══════════════════════════════════════════════════════ */
+.score-card {
+  animation: blurred-fade-in 0.45s ease both;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* ── Dark mode overrides for dynamically-built score cards ── */
+.dark .score-card {
+  background-color: #1e293b; /* slate-800 */
+  border-color: #334155;     /* slate-700 */
+}
+.dark .score-card .ring-emerald-200 { --tw-ring-color: #059669; }
+.dark .score-card .ring-amber-200   { --tw-ring-color: #d97706; }
+.dark .score-card .ring-red-200     { --tw-ring-color: #dc2626; }
+.dark .score-card [class*="text-slate-800"],
+.dark .score-card [class*="text-slate-700"] {
+  color: #e2e8f0; /* slate-200 */
+}
+/* SVG gauge track ring */
+.dark .score-card circle[stroke="#e2e8f0"] {
+  stroke: #334155;
+}
+/* Score badges */
+.dark .score-card .bg-emerald-50  { background-color: rgba(16,185,129,0.15); }
+.dark .score-card .text-emerald-700 { color: #6ee7b7; }
+.dark .score-card .bg-amber-50    { background-color: rgba(245,158,11,0.15); }
+.dark .score-card .text-amber-700  { color: #fcd34d; }
+.dark .score-card .bg-red-50      { background-color: rgba(239,68,68,0.15); }
+.dark .score-card .text-red-700    { color: #fca5a5; }
+.score-card:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.score-card:nth-child(2) {
+  animation-delay: 0.13s;
+}
+.score-card:nth-child(3) {
+  animation-delay: 0.21s;
+}
+.score-card:nth-child(4) {
+  animation-delay: 0.29s;
+}
+
+/* ═══════════════════════════════════════════════════════
+   SVG gauge ring transition
+   ═══════════════════════════════════════════════════════ */
+.gauge-ring {
+  transition: stroke-dasharray 0.85s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Stage progress dots
+   ═══════════════════════════════════════════════════════ */
+.stage-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: #e2e8f0;
+  transition:
+    background 0.35s ease,
+    transform 0.2s ease;
+  flex-shrink: 0;
+}
+.stage-dot.active {
+  background: #3b82f6;
+  transform: scale(1.3);
+  animation: bouncing 0.8s infinite;
+}
+.stage-dot.done {
+  background: #10b981;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Activity log entries
+   ═══════════════════════════════════════════════════════ */
+.log-entry {
+  animation: fade-in 0.25s ease both;
+  font-size: 11px;
+  line-height: 1.5;
+}

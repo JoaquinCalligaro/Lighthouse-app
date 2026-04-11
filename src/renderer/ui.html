@@ -1,0 +1,370 @@
+﻿<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Herramienta de Auditoría Lighthouse</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = { darkMode: 'class' };
+    </script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body
+    class="bg-slate-100 dark:bg-slate-900 min-h-screen font-sans antialiased transition-colors duration-300">
+    <!-- Header -->
+    <header
+      class="bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 shadow-lg animate-slide-in-top">
+      <div class="max-w-2xl mx-auto px-6 py-5 flex items-center gap-4">
+        <div
+          class="flex-shrink-0 w-11 h-11 bg-white/20 rounded-xl flex items-center justify-center animate-bouncing"
+          style="animation-iteration-count: 3; animation-delay: 0.6s">
+          <svg
+            class="w-6 h-6 text-white"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-xl font-bold text-white tracking-tight">
+            Auditoría Lighthouse
+          </h1>
+          <p class="text-blue-200 text-sm leading-none mt-0.5">
+            Rendimiento · Accesibilidad · Buenas Prácticas · SEO
+          </p>
+        </div>
+        <!-- Dark / Light mode toggle -->
+        <button
+          id="theme-toggle"
+          onclick="window.toggleTheme()"
+          class="ml-auto flex-shrink-0 w-9 h-9 rounded-xl bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors duration-200"
+          title="Alternar modo oscuro / claro">
+          <!-- Moon (shown in light mode) -->
+          <svg
+            class="icon-moon w-5 h-5 text-white"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />
+          </svg>
+          <!-- Sun (shown in dark mode) -->
+          <svg
+            class="icon-sun hidden w-5 h-5 text-white"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 3v1m0 16v1m8.66-9h-1M4.34 12h-1m15.07-6.07l-.71.71M6.34 17.66l-.71.71m12.02 0l-.71-.71M6.34 6.34l-.71-.71M12 7a5 5 0 100 10A5 5 0 0012 7z" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main -->
+    <main class="max-w-2xl mx-auto px-5 py-8 space-y-5">
+      <!-- Input Card -->
+      <section
+        class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-6 space-y-5 animate-fade-in transition-colors duration-300"
+        style="animation-delay: 0.1s">
+        <div class="space-y-1.5">
+          <label
+            for="url"
+            class="block text-sm font-semibold text-slate-700 dark:text-slate-300 transition-colors duration-300"
+            >URL a auditar</label
+          >
+          <div class="relative">
+            <span
+              class="absolute inset-y-0 left-3 flex items-center pointer-events-none text-slate-400">
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+              </svg>
+            </span>
+            <input
+              id="url"
+              type="text"
+              placeholder="https://example.com"
+              class="w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-300" />
+          </div>
+        </div>
+
+        <div class="space-y-1.5">
+          <div class="flex items-center justify-between">
+            <label
+              for="browsers"
+              class="block text-sm font-semibold text-slate-700 dark:text-slate-300 transition-colors duration-300"
+              >Navegador</label
+            >
+            <!-- "Use another browser" button -->
+            <button
+              id="other-browser-btn"
+              type="button"
+              class="flex items-center gap-1.5 text-xs font-medium text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors duration-150"
+              title="Indicar la ruta del navegador manualmente">
+              <svg
+                class="w-3.5 h-3.5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3 7a2 2 0 012-2h3l2 3H5a1 1 0 00-1 1v7a2 2 0 002 2h12a2 2 0 002-2V9a1 1 0 00-1-1h-7L12 5H5" />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 12v4m0 0l-2-2m2 2l2-2" />
+              </svg>
+              Usar otro navegador
+            </button>
+          </div>
+
+          <!-- Fallback banner (hidden when browsers are found) -->
+          <div
+            id="browser-fallback"
+            class="hidden flex items-start gap-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 text-amber-800 dark:text-amber-300 rounded-xl px-4 py-3 text-xs">
+            <svg
+              class="w-4 h-4 flex-shrink-0 mt-0.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+            </svg>
+            <span>
+              No se detectó ningún navegador compatible (Chrome, Brave, Edge,
+              Opera). Usá <strong>"Usar otro navegador"</strong> para indicar la
+              ubicación del ejecutable o acceso directo.
+            </span>
+          </div>
+
+          <div class="relative" id="browser-dropdown-wrapper">
+            <!-- Hidden input — value read by renderer.js -->
+            <input type="hidden" id="browsers" />
+
+            <!-- Trigger button -->
+            <button
+              id="browser-trigger"
+              type="button"
+              class="w-full flex items-center gap-2.5 pl-3 pr-8 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-300 cursor-pointer">
+              <span
+                id="browser-trigger-icon"
+                class="flex-shrink-0 flex items-center justify-center"></span>
+              <span
+                id="browser-trigger-name"
+                class="flex-1 text-left truncate text-slate-400 dark:text-slate-500"
+                >Seleccioná un navegador</span
+              >
+              <!-- Chevron -->
+              <svg
+                id="browser-chevron"
+                class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none transition-transform duration-200"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            <!-- Listbox (populated by JS) -->
+            <ul
+              id="browser-list"
+              class="hidden absolute z-50 left-0 right-0 mt-1 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl shadow-lg overflow-hidden"
+              role="listbox"></ul>
+          </div>
+        </div>
+
+        <button
+          id="run-btn"
+          onclick="startAudit()"
+          class="w-full flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 disabled:from-slate-400 disabled:to-slate-400 disabled:cursor-not-allowed text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-200 active:scale-[0.98]">
+          <svg
+            id="run-icon"
+            class="w-4 h-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2.5">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M5 3l14 9-14 9V3z" />
+          </svg>
+          <svg
+            id="run-spinner"
+            class="hidden w-4 h-4 animate-spin"
+            fill="none"
+            viewBox="0 0 24 24">
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4" />
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8v8H4z" />
+          </svg>
+          <span id="run-btn-text">Iniciar Auditoría</span>
+        </button>
+      </section>
+
+      <!-- Progress Card -->
+      <section
+        id="progress"
+        class="hidden bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-6 space-y-3 animate-fade-in transition-colors duration-300">
+        <div class="flex items-center justify-between mb-1">
+          <span
+            id="progress-label"
+            class="text-sm font-medium text-slate-600 dark:text-slate-400 transition-colors duration-300"
+            >Preparando...</span
+          >
+          <span id="progress-pct" class="text-sm font-bold text-blue-600"
+            >0%</span
+          >
+        </div>
+        <div
+          class="w-full bg-slate-100 dark:bg-slate-700 rounded-full h-3 overflow-hidden transition-colors duration-300">
+          <div
+            id="bar"
+            class="h-full rounded-full bar-gradient transition-all duration-500 ease-out"
+            style="width: 0%"></div>
+        </div>
+        <div class="flex gap-1.5 pt-1" id="stage-dots"></div>
+        <!-- Activity Log -->
+        <div
+          id="audit-log"
+          class="hidden mt-2 bg-slate-900 rounded-xl p-3 font-mono overflow-y-auto max-h-36 border border-slate-700 space-y-0.5"></div>
+      </section>
+
+      <!-- Error -->
+      <div
+        id="error"
+        class="hidden items-center gap-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 rounded-xl px-5 py-4 text-sm animate-fade-in transition-colors duration-300">
+        <svg
+          class="w-5 h-5 flex-shrink-0"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+        </svg>
+        <span id="error-text"></span>
+      </div>
+
+      <!-- Results -->
+      <section id="result-wrapper" class="hidden space-y-4">
+        <!-- Audited URL badge -->
+        <div
+          class="flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm animate-slide-in-top transition-colors duration-300">
+          <svg
+            class="w-4 h-4 text-emerald-500 flex-shrink-0"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span
+            class="text-xs text-slate-500 dark:text-slate-400 font-medium transition-colors duration-300"
+            >Auditoría completa —</span
+          >
+          <span
+            id="result-url"
+            class="text-xs text-blue-600 font-semibold truncate"></span>
+        </div>
+
+        <!-- Score grid -->
+        <div id="scores-grid" class="grid grid-cols-2 gap-4"></div>
+
+        <!-- Mini improvements panel -->
+        <div
+          id="improvements-panel"
+          class="hidden bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden transition-colors duration-300 animate-fade-in"
+          style="animation-delay: 0.25s">
+          <div
+            class="flex items-center gap-2 px-5 py-3 border-b border-slate-100 dark:border-slate-700">
+            <svg
+              class="w-4 h-4 text-amber-500 flex-shrink-0"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            <span
+              class="text-sm font-semibold text-slate-700 dark:text-slate-200"
+              >Oportunidades de mejora</span
+            >
+            <span class="ml-auto text-xs text-slate-400 dark:text-slate-500"
+              >Descargá el PDF para el detalle completo</span
+            >
+          </div>
+          <ul
+            id="improvements-list"
+            class="divide-y divide-slate-100 dark:divide-slate-700"></ul>
+        </div>
+
+        <!-- PDF Download Button -->
+        <button
+          id="pdf-btn"
+          onclick="downloadPdf()"
+          class="w-full flex items-center justify-center gap-2 py-3 px-6 rounded-xl border-2 border-indigo-200 dark:border-indigo-700 bg-indigo-50 dark:bg-indigo-900/30 hover:bg-indigo-100 dark:hover:bg-indigo-900/50 hover:border-indigo-300 dark:hover:border-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed text-indigo-700 dark:text-indigo-300 text-sm font-semibold transition-all duration-200 active:scale-[0.98] animate-fade-in"
+          style="animation-delay: 0.35s">
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          Descargar Informe PDF
+        </button>
+      </section>
+    </main>
+
+    <script src="renderer.js"></script>
+  </body>
+</html>

@@ -1,0 +1,60 @@
+{
+  "name": "lighthouse-app",
+  "version": "2.0.0",
+  "description": "Herramienta de escritorio para auditorías Lighthouse",
+  "author": "lighthouse-app",
+  "main": "src/main/app.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win portable",
+    "build:installer": "electron-builder --win nsis",
+    "test:smoke": "node tests/smoke.test.js",
+    "test:lighthouse": "node tests/lighthouse.test.js"
+  },
+  "build": {
+    "appId": "com.lighthouse-app.desktop",
+    "productName": "Lighthouse Audit Tool",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "package.json",
+      "node_modules/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "src/icons/svg",
+        "to": "icons/svg"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "installerLanguages": [
+        "es_ES"
+      ]
+    }
+  },
+  "devDependencies": {
+    "electron": "^41.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "dependencies": {
+    "chrome-launcher": "^1.2.1",
+    "lighthouse": "^12.8.2",
+    "lighthouse-logger": "^2.0.2",
+    "tailwind-animations": "^1.0.1"
+  }
+}
