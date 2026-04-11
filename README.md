@@ -52,18 +52,21 @@ Si tenés Windows 10 u 11, ya tenés **Microsoft Edge** instalado, así que no n
 
 ### Paso 2 — Descargar la aplicación
 
-Descargá el archivo `Lighthouse Audit Tool.exe` desde la sección [Releases](../../releases) de este repositorio.
+1. Ir a la sección **[Releases](https://github.com/JoaquinCalligaro/Lighthouse-app/releases/latest)** del repositorio.
+2. Bajo **Assets**, hacer clic en **`Lighthouse-Audit-Tool-v2.0.0-win-portable.zip`** para descargarlo.
+3. Descomprimir el archivo `.zip` en cualquier carpeta (escritorio, pendrive, Documentos, donde prefieras).
+
+> Descarga directa: **[Lighthouse-Audit-Tool-v2.0.0-win-portable.zip](https://github.com/JoaquinCalligaro/Lighthouse-app/releases/download/v2.0.0/Lighthouse-Audit-Tool-v2.0.0-win-portable.zip)**
 
 ### Paso 3 — Ejecutar la aplicación
 
-1. Hacé **doble clic** sobre el archivo `Lighthouse Audit Tool.exe`.
-2. Si Windows muestra una advertencia de seguridad ("Windows protegió tu PC"), hacé clic en **"Más información"** y luego en **"Ejecutar de todos modos"**.
+1. Abrí la carpeta `win-unpacked` que se extrajo del zip.
+2. Hacé **doble clic** sobre el archivo `Lighthouse Audit Tool.exe`.
+3. Si Windows muestra una advertencia de seguridad ("Windows protegió tu PC"), hacé clic en **"Más información"** y luego en **"Ejecutar de todos modos"**.  
    > Esto es normal para aplicaciones portables que no tienen certificado de firma. El archivo es seguro.
-3. La aplicación se abre directamente. **No requiere instalación.**
+4. La aplicación se abre directamente. **No requiere instalación.**
 
-> El archivo `.exe` es **portable**: podés guardarlo en cualquier carpeta, en un pendrive, o en el escritorio. No modifica tu sistema ni deja entradas en el registro de Windows.
-
----
+> La app es **portable**: podés guardar la carpeta en cualquier lugar o en un pendrive. No modifica tu sistema ni deja entradas en el registro de Windows.
 
 ## 🖥️ Cómo usar la aplicación paso a paso
 
