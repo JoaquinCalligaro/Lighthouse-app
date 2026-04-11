@@ -62,11 +62,13 @@ Si tenés Windows 10 u 11, ya tenés **Microsoft Edge** instalado, así que no n
 
 1. Abrí la carpeta `win-unpacked` que se extrajo del zip.
 2. Hacé **doble clic** sobre el archivo `Lighthouse Audit Tool.exe`.
-3. Si Windows muestra una advertencia de seguridad ("Windows protegió tu PC"), hacé clic en **"Más información"** y luego en **"Ejecutar de todos modos"**.  
+3. Si Windows muestra una advertencia de seguridad ("Windows protegió tu PC"), hacé clic en **"Más información"** y luego en **"Ejecutar de todos modos"**.
    > Esto es normal para aplicaciones portables que no tienen certificado de firma. El archivo es seguro.
 4. La aplicación se abre directamente. **No requiere instalación.**
 
 > La app es **portable**: podés guardar la carpeta en cualquier lugar o en un pendrive. No modifica tu sistema ni deja entradas en el registro de Windows.
+
+---
 
 ## 🖥️ Cómo usar la aplicación paso a paso
 
@@ -171,7 +173,7 @@ El archivo `.exe` es solo para Windows. Para Mac y Linux, necesitás compilar la
 ### Instalación
 
 ```bash
-git clone https://github.com/joaquincalligaro/lighthouse-app.git
+git clone https://github.com/JoaquinCalligaro/Lighthouse-app.git
 cd lighthouse-app
 npm install
 ```
